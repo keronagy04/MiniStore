@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -10,16 +11,38 @@
 #include <cmath>
 #include <cctype>
 #include <chrono>
+#include <cstdlib>
 
 #include "httplib.h"
 
 using namespace std;
 using namespace httplib;
 
-const int SERVER_PORT = 8080;
+// =========================================================
+// SERVER CONFIG
+// =========================================================
+
+int getServerPort() {
+    const char* portEnv = getenv("PORT");
+
+    if (portEnv != nullptr && *portEnv != '\0') {
+        int port = atoi(portEnv);
+
+        if (port > 0 && port <= 65535) {
+            return port;
+        }
+    }
+
+    return 8080;
+}
+
 const string ORDERS_FILE = "orders.json";
 
 mutex ordersMutex;
+
+// =========================================================
+// PRODUCTS
+// =========================================================
 
 struct Product {
     int id;
@@ -295,7 +318,7 @@ string orderId() {
     auto milliseconds =
         chrono::duration_cast<chrono::milliseconds>(
             now.time_since_epoch()
-            ).count();
+        ).count();
 
     time_t seconds = chrono::system_clock::to_time_t(now);
     tm local{};
@@ -430,7 +453,10 @@ void postOrder(const Request& req, Response& res) {
             floor(quantity) != quantity) {
 
             res.status = 400;
-            res.set_content(errorJson("Invalid product or quantity."), "application/json");
+            res.set_content(
+                errorJson("Invalid product or quantity."),
+                "application/json"
+            );
             return;
         }
 
@@ -506,23 +532,34 @@ void postOrder(const Request& req, Response& res) {
 int main() {
     Server server;
 
+    // HEALTH CHECK
+    server.Get("/health", [](const Request&, Response& res) {
+        res.status = 200;
+        res.set_content("OK", "text/plain");
+    });
+
+    server.Get("/healthz", [](const Request&, Response& res) {
+        res.status = 200;
+        res.set_content("OK", "text/plain");
+    });
+
     // FRONTEND
     server.Get("/", [](const Request&, Response& res) {
         serveFile(res, "index.htm", "text/html");
-        });
+    });
 
     server.Get("/style.css", [](const Request&, Response& res) {
         serveFile(res, "Style.css", "text/css");
-        });
+    });
 
     server.Get("/script.js", [](const Request&, Response& res) {
         serveFile(res, "script.js", "application/javascript");
-        });
+    });
 
     // PRODUCTS
     server.Get("/api/products", [](const Request&, Response& res) {
         res.set_content(productsJson, "application/json");
-        });
+    });
 
     // STATUS
     server.Get("/api/status", [](const Request&, Response& res) {
@@ -530,32 +567,36 @@ int main() {
             "{\"status\":\"success\",\"message\":\"MiniStore Backend is running\"}",
             "application/json"
         );
-        });
+    });
 
     // ORDERS
     server.Post("/api/orders", postOrder);
 
     server.Get("/api/orders", [](const Request&, Response& res) {
         res.set_content(getOrders(), "application/json");
-        });
+    });
 
     // LOGGING
     server.set_logger([](const Request& req, const Response& res) {
         cout << req.method << " " << req.path
             << " -> " << res.status << endl;
-        });
+    });
+
+    int port = getServerPort();
 
     cout << "==================================\n";
     cout << "         MINI STORE SERVER         \n";
     cout << "==================================\n";
-    cout << "Website: http://localhost:8080\n";
-    cout << "Products: http://localhost:8080/api/products\n";
-    cout << "Orders: http://localhost:8080/api/orders\n";
-    cout << "Status: http://localhost:8080/api/status\n";
+    cout << "Website: http://localhost:" << port << "\n";
+    cout << "Products: http://localhost:" << port << "/api/products\n";
+    cout << "Orders: http://localhost:" << port << "/api/orders\n";
+    cout << "Status: http://localhost:" << port << "/api/status\n";
+    cout << "Health: http://localhost:" << port << "/health\n";
+    cout << "Listening on 0.0.0.0:" << port << "\n";
     cout << "Press Ctrl+C to stop.\n\n";
 
-    if (!server.listen("127.0.0.1", SERVER_PORT)) {
-        cerr << "Server failed to start. Port 8080 may be busy.\n";
+    if (!server.listen("0.0.0.0", port)) {
+        cerr << "Server failed to start on port " << port << endl;
         return 1;
     }
 
