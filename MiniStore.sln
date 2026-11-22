@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MiniStore", "MiniStore\MiniStore.vcxproj", "{74B49FFD-8D3A-498E-A0F5-3E6117305B94}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{26AD3736-A15C-43ED-94B3-F53BF2AC9CA3}"
+	ProjectSection(SolutionItems) = preProject
+		MiniStore\Style - Copy.css = MiniStore\Style - Copy.css
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74B49FFD-8D3A-498E-A0F5-3E6117305B94}.Debug|x64.ActiveCfg = Debug|x64
+		{74B49FFD-8D3A-498E-A0F5-3E6117305B94}.Debug|x64.Build.0 = Debug|x64
+		{74B49FFD-8D3A-498E-A0F5-3E6117305B94}.Debug|x86.ActiveCfg = Debug|Win32
+		{74B49FFD-8D3A-498E-A0F5-3E6117305B94}.Debug|x86.Build.0 = Debug|Win32
+		{74B49FFD-8D3A-498E-A0F5-3E6117305B94}.Release|x64.ActiveCfg = Release|x64
+		{74B49FFD-8D3A-498E-A0F5-3E6117305B94}.Release|x64.Build.0 = Release|x64
+		{74B49FFD-8D3A-498E-A0F5-3E6117305B94}.Release|x86.ActiveCfg = Release|Win32
+		{74B49FFD-8D3A-498E-A0F5-3E6117305B94}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4E4EBA9-EF88-4482-94D4-A2DE2BF932DE}
+	EndGlobalSection
+EndGlobal

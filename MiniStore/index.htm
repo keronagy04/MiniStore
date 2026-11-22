@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniStore | Shop Smart</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container navbar-inner">
+            <a href="#" class="logo">Mini<span>Store</span></a>
+
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#shop">Shop</a>
+                <a href="#about">About</a>
+                <a href="#ordersSection">My Orders</a>
+            </nav>
+
+            <button class="cart-button" id="openCartBtn">
+                🛒 Cart <span id="cartCount" class="cart-count">0</span>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <span class="hero-tag">YOUR EVERYDAY ESSENTIALS</span>
+                <h1>Discover products.<br><span>Love every choice.</span></h1>
+                <p>Find your favorite products with a simple shopping experience, great prices, and quality you can trust.</p>
+                <div class="hero-buttons">
+                    <a href="#shop" class="btn btn-primary">Shop Now →</a>
+                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <img class="hero-image"
+                 src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=85"
+                 alt="Shopping">
+        </div>
+    </section>
+
+    <section class="container features">
+        <div class="feature-card">
+            <div class="feature-icon">🚚</div>
+            <div><h3>Fast Delivery</h3><p>Orders delivered to your door.</p></div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💎</div>
+            <div><h3>Quality Products</h3><p>Selected products for everyday life.</p></div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <div><h3>Secure Shopping</h3><p>A simple shopping experience.</p></div>
+        </div>
+    </section>
+
+    <section class="section container" id="shop">
+        <div class="section-heading">
+            <div>
+                <span class="section-label">OUR COLLECTION</span>
+                <h2>Explore Products</h2>
+                <p>Find exactly what you are looking for.</p>
+            </div>
+        </div>
+
+        <div class="shop-toolbar">
+            <div class="search-box">
+                <span>🔍</span>
+                <input id="searchInput" type="search" placeholder="Search by product name...">
+            </div>
+
+            <select id="sortSelect" class="sort-select">
+                <option value="featured">Featured</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="rating">Highest Rated</option>
+                <option value="name">Name: A to Z</option>
+            </select>
+        </div>
+
+        <div class="category-filters">
+            <button class="filter-btn active" data-category="All">All Products</button>
+            <button class="filter-btn" data-category="Electronics">Electronics</button>
+            <button class="filter-btn" data-category="Accessories">Accessories</button>
+        </div>
+
+        <div class="results-info">
+            <span id="resultsCount">Loading products...</span>
+        </div>
+
+        <div id="productsGrid" class="products-grid">
+            <div class="loading">Loading products...</div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="container about-content">
+            <img class="about-image"
+                 src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=85"
+                 alt="Shopping experience">
+            <div class="about-text">
+                <span class="section-label">ABOUT MINISTORE</span>
+                <h2>Shopping made simple.</h2>
+                <p>MiniStore is designed to make shopping easy, enjoyable, and convenient.</p>
+                <p>Discover useful products, explore categories, and place your order in just a few steps.</p>
+                <ul>
+                    <li>✓ Easy product discovery</li>
+                    <li>✓ Simple checkout experience</li>
+                    <li>✓ Products for everyday needs</li>
+                </ul>
+                <a href="#shop" class="btn btn-primary">Explore Products</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="orders-section container" id="ordersSection">
+        <div class="section-heading">
+            <div>
+                <span class="section-label">YOUR PURCHASES</span>
+                <h2>My Orders</h2>
+                <p>Your previous purchases saved on MiniStore.</p>
+            </div>
+            <button class="btn btn-secondary" id="refreshOrdersBtn">Refresh Orders</button>
+        </div>
+        <div class="orders-list" id="ordersList">
+            <div class="loading">Loading orders...</div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div>
+                <a href="#" class="logo footer-logo">Mini<span>Store</span></a>
+                <p>Your everyday shopping destination.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#shop">Shop</a>
+                    <a href="#about">About</a>
+                    <a href="#ordersSection">My Orders</a>
+                </div>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <div class="footer-links">
+                    <span>support@ministore.local</span>
+                    <span>Customer Support</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2026 MiniStore. All rights reserved.</div>
+    </footer>
+
+    <!-- CART OVERLAY -->
+    <div class="overlay" id="overlay"></div>
+
+    <aside class="cart-panel" id="cartPanel">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-button" id="closeCartBtn">×</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span>Total</span>
+                <strong id="cartTotal">EGP 0</strong>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkoutBtn">Checkout</button>
+            <button class="btn btn-secondary btn-block" id="continueShoppingBtn">Continue Shopping</button>
+        </div>
+    </aside>
+
+    <!-- PRODUCT DETAILS MODAL -->
+    <div class="product-modal" id="productModal">
+        <div class="product-modal-backdrop" id="productModalBackdrop"></div>
+        <div class="product-modal-content" id="productModalContent"></div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div class="modal" id="checkoutModal">
+        <div class="checkout-backdrop" id="checkoutOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Checkout</h2>
+                <button class="close-button" id="closeCheckoutBtn">×</button>
+            </div>
+
+            <form class="checkout-form" id="checkoutForm">
+                <div class="form-group">
+                    <label for="customerName">Full Name *</label>
+                    <input id="customerName" name="customerName" required maxlength="120" placeholder="Full name">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input id="phone" name="phone" type="tel" required maxlength="30" placeholder="01xxxxxxxxx">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email (optional)</label>
+                        <input id="email" name="email" type="email" maxlength="150" placeholder="you@example.com">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Delivery Address *</label>
+                    <textarea id="address" name="address" required maxlength="500" placeholder="Your delivery address"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Order Notes</label>
+                    <textarea id="notes" name="notes" maxlength="500" placeholder="Additional details..."></textarea>
+                </div>
+
+                <div id="checkoutSummary" class="checkout-summary"></div>
+
+                <button class="btn btn-primary btn-block" id="confirmOrderBtn" type="submit">
+                    Confirm Order
+                </button>
+            </form>
+            <div id="orderSuccess" style="display:none"></div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
